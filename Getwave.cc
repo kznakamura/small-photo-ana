@@ -1,12 +1,20 @@
 #include <iostream>
 #include "Root_h.h"
 
-usingnamespace std;
+using namespace std;
 
-double Getwave(int entry, int ch, int clock){
-
-
-
-
-
+void Getwave (string filename){
+  
+  TTree *rawwave;
+  TFile *inputfile = new TFile(filename.c_str());
+  
+  rawwave = (TTree*)inputfile->Get("rawwave");
+ 
+  cout << rawwave->GetEntries() << endl;
+  
+  //  rawwave -> Close();
+  
+  
+  
+  
 }

@@ -6,6 +6,7 @@
 
 using namespace std;
 
+void Getwave(string filename);
 
 int main(int argc, char* argv[]){
   if(argc!=2){
@@ -18,7 +19,7 @@ int main(int argc, char* argv[]){
 
   TApplication app( "app", &argc, argv );
 
-  
+  Getwave(filename);
 
   
   app.Run();
