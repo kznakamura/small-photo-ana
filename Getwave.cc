@@ -12,7 +12,7 @@ void Getwave (string filename){
  
   cout << rawwave->GetEntries() << endl;
   
-  //  rawwave -> Close();
+  inputfile -> Close();
   
   
   

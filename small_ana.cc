@@ -1,12 +1,16 @@
 #include <iostream>
 #include <string>
-
+#include <vector>
 #include "Root_h.h"
 
 
 using namespace std;
 
-void Getwave(string filename);
+const int READCH=6;
+//const int SAMPLE=2048;
+
+vector<double> GetWave(TTree *rawwave, int ch, int sample);
+
 
 int main(int argc, char* argv[]){
   if(argc!=2){
@@ -19,8 +23,25 @@ int main(int argc, char* argv[]){
 
   TApplication app( "app", &argc, argv );
 
-  Getwave(filename);
+  TTree *rawwave;
+  TFile *inputfile = new TFile(filename.c_str());
+  rawwave = (TTree*)inputfile->Get("rawwave");
 
+  const int ENTRY = rawwave -> GetEntries();
+
+ 
+  for(int entry = 0; entry < ENTRY; entry++){  
+    for(int ch = 0; ch < READCH; ch++){
+      const int sample = rawwave -> GetLeaf(Form("ch%d",ch)) -> GetLen();
+      //      cout << SAMPLE << endl;
+      rawwave->GetEntry(entry);
+      
+      vector<double> wave = GetWave(rawwave, ch, sample);
+      
+      cout << wave.size() << endl;
+	    
+    }
+  }
   
   app.Run();
 }
