@@ -10,7 +10,7 @@ const int READCH=6;
 //const int SAMPLE=2048;
 
 vector<double> GetWave(TTree *rawwave, int ch, int sample);
-
+double GetIntegral(vector<double> wave);
 
 int main(int argc, char* argv[]){
   if(argc!=2){
@@ -37,9 +37,10 @@ int main(int argc, char* argv[]){
       rawwave->GetEntry(entry);
       
       vector<double> wave = GetWave(rawwave, ch, sample);
-      
       cout << wave.size() << endl;
-	    
+      
+      double integral = GetIntegral(wave);
+      cout << integral << endl;
     }
   }
   
